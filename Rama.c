@@ -7,8 +7,45 @@
  */
 
 #include <stdio.h>
+#include <time.h>
+
+#ifdef __APPLE__
+#include <mach/mach.h>
+#elif __linux__
+#include <sys/resource.h>
+#elif _WIN32
+#include <windows.h>
+#include <psapi.h>
+#endif
+
+void statisticos();
+double get_memory_mb();
 
 int main() {
-    printf("Welcome to Zero2Hero C Programming!");
-    return 0;
+    clock_t start = clock();
+    char *nombre = "goyin";
+    printf("Que royooo, me llama %s, que paso chices.", nombre);
+    printf("\nMemory: %.2f MB", get_memory_mb());
+    clock_t end = clock();
+    printf("\nTiempo de programa: %.4f segundos", (double)(end - start) / CLOCKS_PER_SEC);
+}
+
+double get_memory_mb() {
+    const float uno_mb = 1024.0;
+    #ifdef __APPLE__
+        struct mach_task_basic_info info;
+        mach_msg_type_number_t count = MACH_TASK_BASIC_INFO_COUNT;
+        task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &count);
+        return info.resident_size / (uno_mb * uno_mb);
+    #elif __linux__
+        struct rusage usage;
+        getrusage(RUSAGE_SELF, &usage);
+        return usage.ru_maxrss / uno_mb;
+    #elif _WIN32
+        PROCESS_MEMORY_COUNTERS pmc;
+        GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+        return pmc.WorkingSetSize / (uno_mb * uno_mb);
+    #else
+        return 0.0;
+    #endif
 }
