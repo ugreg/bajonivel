@@ -2,7 +2,7 @@
  * suppress mac os only linker warnings clang: warning: overriding 
  * deployment version from '16.0' to '26.0' [-Woverriding-deployment-version]
  * 
- * gcc-14 ./Rama.c -o app -mmacosx-version-min='26.0'
+ * gcc-14 ./Seda.c -o app -mmacosx-version-min='26.0' -DNUM_ES_PALABARAS=10
  * 
  */
 
@@ -18,10 +18,14 @@
 #include <psapi.h>
 #endif
 
-void statisticos();
 // memoria en las programas son virtaul y NO es el mismo de la memoria fisical
 // en palabaras sencillas, memoria virtaul es en tu codigo y memoria fisical es en tu hardware
 // y tambien hay translaciones de CPU y kernel por "fisical lookups
+
+#define NUM_ES_PALABARAS 4
+
+void statisticos();
+void arrays();
 double get_memory_mb();
 
 int main() {
@@ -31,6 +35,16 @@ int main() {
     printf("\nMemory: %.2f MB", get_memory_mb());
     clock_t end = clock();
     printf("\nTiempo de programa: %.4f segundos", (double)(end - start) / CLOCKS_PER_SEC);
+}
+
+void arrays() {
+    // char *palabaras[NUM_ES_PALABARAS] = {"tejon", "zorillo", "imanes", "lechuza"};
+    char *palabaras[NUM_ES_PALABARAS];
+    memset(&palabaras, '\0', sizeof(palabaras));
+    char *palabaras[0] = "tejon";
+    char *palabaras[0] = "zorillo";
+    char *palabaras[0] = "imanes";
+    char *palabaras[0] = "lechuza";
 }
 
 double get_memory_mb() {
