@@ -1,9 +1,9 @@
 /*
- * suppress mac os only linker warnings clang: warning: overriding 
+ * suppress mac os only linker warnings clang: warning: overriding
  * deployment version from '16.0' to '26.0' [-Woverriding-deployment-version]
- * 
+ *
  * gcc-14 ./Seda.c -o app -mmacosx-version-min='26.0' -DNUM_ES_PALABARAS=10
- * 
+ *
  */
 
 #include <stdio.h>
@@ -30,8 +30,11 @@ double get_memory_mb();
 
 int main() {
     clock_t start = clock();
+
     char *nombre = "goyin";
-    printf("Que royooo, me llamo %s, que paso chices.", nombre);
+    printf("Que royooo, me llamo %s, que paso chices.\n", nombre);
+    arrays();
+    
     printf("\nMemory: %.2f MB", get_memory_mb());
     clock_t end = clock();
     printf("\nTiempo de programa: %.4f segundos", (double)(end - start) / CLOCKS_PER_SEC);
@@ -41,10 +44,11 @@ void arrays() {
     // char *palabaras[NUM_ES_PALABARAS] = {"tejon", "zorillo", "imanes", "lechuza"};
     char *palabaras[NUM_ES_PALABARAS];
     memset(&palabaras, '\0', sizeof(palabaras));
-    char *palabaras[0] = "tejon";
-    char *palabaras[0] = "zorillo";
-    char *palabaras[0] = "imanes";
-    char *palabaras[0] = "lechuza";
+    palabaras[0] = "tejon";
+    palabaras[1] = "zorillo";
+    palabaras[2] = "imanes";
+    palabaras[3] = "lechuza";
+    printf("%s\n", palabaras[3]);
 }
 
 double get_memory_mb() {
