@@ -23,21 +23,42 @@
 // y tambien hay translaciones de CPU y kernel por "fisical lookups
 
 #define NUM_ES_PALABARAS 4
+#define C_UNO "\n│                       ▐▛███▜▌"
+#define C_DOS "│                      ▝▜█████▛▘"
+#define C_TRS "│                        ▘▘ ▝▝"
 
+void corre_corre_corre();
 void statisticos();
+void disfruta();
 void arrays();
+void poitnersss();
 double get_memory_mb();
 
 int main() {
+    corre_corre_corre();
+    return 0;
+}
+
+void corre_corre_corre() {
     clock_t start = clock();
 
-    char *nombre = "goyin";
-    printf("Que royooo, me llamo %s, que paso chices.\n", nombre);
+    disfruta(1, "Matrizes");
     arrays();
-    
+    disfruta(2, "Agujas");
+    poitnersss();
+
     printf("\nMemory: %.2f MB", get_memory_mb());
     clock_t end = clock();
     printf("\nTiempo de programa: %.4f segundos", (double)(end - start) / CLOCKS_PER_SEC);
+}
+
+void disfruta(int n, const char *w) {
+    puts(C_UNO);
+    puts(C_DOS);
+    puts(C_TRS);
+    puts("────────────────────────────────────────");
+    printf("%d %s\n", n, w);
+    puts("────────────────────────────────────────");
 }
 
 void arrays() {
@@ -48,7 +69,15 @@ void arrays() {
     palabaras[1] = "zorillo";
     palabaras[2] = "imanes";
     palabaras[3] = "lechuza";
-    printf("%s\n", palabaras[3]);
+    printf("Element cuatro: %s\n", palabaras[3]);
+    printf("Element cuatro ptr: %p\n", *palabaras[3]);
+}
+
+void poitnersss() {
+    int beeg_data = 1000000;
+    int *ptr = &beeg_data; // direccion de nuestro variable
+    printf("deference the ptr para dar el value %d\n", *ptr);
+    printf("justo el poitner %p", ptr);
 }
 
 double get_memory_mb() {
