@@ -95,6 +95,18 @@ void tipos() {
     Lapras.tipo       = "Agua/Hielo";
     
     printf("Pokedex\n--\n%d\n%d\n%s\n", Lapras.numero, Lapras.generacion, Lapras.tipo);
+    
+    printf("Mira los tamanos de mis variables");
+    char byte;
+    short dos_bytes;
+    int four_byte_en_32_bit_sistemas;
+    long long int eight_bytes;
+    
+    int max_con_un_B = 2147483647;
+    unsigned int max_u = 4294967295;
+    
+    float flotador = 3.14;
+    double doble = 3.1459;
 }
 
 double get_memory_mb() {
