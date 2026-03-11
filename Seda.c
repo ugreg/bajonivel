@@ -29,9 +29,11 @@
 
 void corre_corre_corre();
 void statisticos();
-void disfruta();
+
+void disfruta(int n, const char *w);
 void arrays();
 void poitnersss();
+void tipos();
 double get_memory_mb();
 
 int main() {
@@ -46,6 +48,8 @@ void corre_corre_corre() {
     arrays();
     disfruta(2, "Agujas");
     poitnersss();
+    disfruta(3, "Tipos");
+    tipos();
 
     printf("\nMemory: %.2f MB", get_memory_mb());
     clock_t end = clock();
@@ -69,15 +73,28 @@ void arrays() {
     palabaras[1] = "zorillo";
     palabaras[2] = "imanes";
     palabaras[3] = "lechuza";
-    printf("Element cuatro: %s\n", palabaras[3]);
-    printf("Element cuatro ptr: %p\n", *palabaras[3]);
+    printf("Elemento cuatro: %s\n", palabaras[3]);
+    printf("Elemento cuatro ptr: %c\n", *palabaras[3]);
 }
-
+struct pkmn {
+    int numero;
+    int generacion;
+    char *tipo;
+};
 void poitnersss() {
     int beeg_data = 1000000;
     int *ptr = &beeg_data; // direccion de nuestro variable
-    printf("deference the ptr para dar el value %d\n", *ptr);
-    printf("justo el poitner %p", ptr);
+    printf("deference el ptr para dar el value %d\n", *ptr);
+    printf("justo el poitner %p\n", (void *)ptr);
+}
+
+void tipos() {
+    struct pkmn Lapras;
+    Lapras.numero     = 131;
+    Lapras.generacion = 1;
+    Lapras.tipo       = "Agua/Hielo";
+    
+    printf("Pokedex\n--\n%d\n%d\n%s\n", Lapras.numero, Lapras.generacion, Lapras.tipo);
 }
 
 double get_memory_mb() {
